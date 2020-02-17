@@ -1,42 +1,24 @@
 package Main
+//Data class
+data class User(var name: String, var age: Int){
 
-import doublePi
-import swap2Elements
-
-class A {
-    fun methodA(){
-        println("method A of class A")
-    }
-    fun methodX(){
-        println("method X of class A")
-    }
-    fun B.methodB2() {
-        methodA()
-        this.methodB()
-        methodX()
-        this@A.methodX()
-    }
-    fun callB2FromA(b: B){
-        b.methodB2()
-    }
-}
-class B {
-    fun methodB(){
-        println("method B of class B")
-    }
-    fun methodX(){
-        println("method X of class B")
-    }
 }
 
 fun main(args: Array<String>){
-    val listOfStrings:MutableList<String> = mutableListOf("0","1","2","3","4")
-    listOfStrings.swap2Elements(0, 3)
-    println("listOfStrings = $listOfStrings")
-    println("pi = ${Calculation.PI()}")
-    println("2 * pi = ${Calculation.doublePi()}")
-    var b = B()
-        //b.methodB2()
-    var a = A()
-    a.callB2FromA(b)
+    var user = User(name = "Ymt", age = 18)
+    println(user.toString())
+    var backupUser = user.copy()
+    user.age = 18
+    println("After")
+    println(user.toString())
+    println(backupUser.toString())
+    //hashcode
+    println(user.hashCode())
+    println(backupUser.hashCode())
+    if(user.hashCode() == backupUser.hashCode()) {
+        println("same content")
+    } else println("different content")
+    if(user.equals(backupUser)) {
+        println("same content")
+    } else println("different content")
 }
