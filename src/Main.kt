@@ -1,22 +1,20 @@
 package Main
 
-interface BirdInterface {
-    fun flyAndFindFood()
-}
+import kotlin.reflect.KProperty
 
-class Eagle(val age: Int) : BirdInterface {
-    override fun flyAndFindFood() {
-        println("I'm an eagle, I'm $age  years old.")
+class User {
+    var todayTasks: String by DelegatedUser()
+}
+class DelegatedUser {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>) : String{
+        return "$thisRef, thanks for delegating '${property.name}' to me !"
+    }
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("assigned to '${property.name} in $thisRef. Details: $value'")
     }
 }
-class Cuckoo(b : BirdInterface):BirdInterface by b {
-    //    override fun flyAndFindFood() {
-    //        println("I'm a cuckoo. I'm flying and finding food")
-    //    }
-}
 fun main(args: Array<String>){
-    val eagle = Eagle(2)
-    eagle.flyAndFindFood()
-    val cuckoo = Cuckoo(eagle)//interface?
-    cuckoo.flyAndFindFood()
+    var user = User()
+    println(user.todayTasks)
+    user.todayTasks = "I make a new project"
 }
