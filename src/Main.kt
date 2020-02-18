@@ -1,24 +1,26 @@
 package Main
-//Data class
-data class User(var name: String, var age: Int){
 
+class Fruit {
+    private var watermelon: String = "wtm"
+    private var grapes: String = "Dautay"
+    private var greenApple: String = "GA"
+    class Nested {
+        fun sayHello(){
+            println("a function inside a NESTED class")
+        }
+    }
+    inner class Inner {
+        fun getApple():String {
+            println("a function inside an INNER class")
+            println("apple is $greenApple")
+            return "1"
+        }
+    }
 }
 
 fun main(args: Array<String>){
-    var user = User(name = "Ymt", age = 18)
-    println(user.toString())
-    var backupUser = user.copy()
-    user.age = 18
-    println("After")
-    println(user.toString())
-    println(backupUser.toString())
-    //hashcode
-    println(user.hashCode())
-    println(backupUser.hashCode())
-    if(user.hashCode() == backupUser.hashCode()) {
-        println("same content")
-    } else println("different content")
-    if(user.equals(backupUser)) {
-        println("same content")
-    } else println("different content")
+    Fruit.Nested().sayHello()
+    var fruit = Fruit()
+    var innerFruit = fruit.Inner()
+    innerFruit.getApple()
 }
